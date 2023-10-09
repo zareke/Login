@@ -1,6 +1,6 @@
 ﻿
 
-function validarFormulario(password) 
+function validarFormulario(password, ochoContainer, especialContainer, mayuscMinuscContainer) 
 {
   const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')','&','"','/','='
 ]
@@ -8,14 +8,16 @@ function validarFormulario(password)
   //Validacion de la contraseña
   let carEspecialF = false, mayorOcho = false, mayusc = false, minusc = false;
 
+  if(carEspeciales.some(x => {
+    return password.value.includes(x);
+  })) carEspecialF=true
+
   for (let i = 0; i < password.value.length; i++) {
-    if (carEspeciales.find(x => x == password.value[i])) {
-      carEspecialF == true
-    }
-    if(password.value[i] == password.value[i].toUpperCase() && !mayusc){
+    
+    if(!carEspeciales.includes(password.value[i]) && password.value[i] == password.value[i].toUpperCase() && !mayusc){
       mayusc = true;
     }
-    if(password.value[i] == password.value[i].toLowerCase() && !minusc){
+    if(!carEspeciales.includes(password.value[i]) && password.value[i] == password.value[i].toLowerCase() && !minusc){
       minusc = true;
     }
   }
@@ -23,14 +25,26 @@ function validarFormulario(password)
     mayorOcho = true;
   }
   //Cambio de estilo
-  if(!carEspecialF){
-    alert("caracter especial")
-  }
   if(!mayorOcho){
-    alert("password no mayor a 8")
+    ochoContainer.style.backgroundColor = "red"
+    ochoContainer.checked = false
+  }else{
+    ochoContainer.style.backgroundColor = "green"
+    ochoContainer.checked = true
   }
-  if(!mayusc && minusc){
-    alert("mayuscula")
+  if(!carEspecialF){
+    especialContainer.style.backgroundColor = "red"
+    especialContainer.checked = false
+  }else{
+    especialContainer.style.backgroundColor = "green"
+    especialContainer.checked = true
+  }
+  if(!mayusc || !minusc){
+    mayuscMinuscContainer.style.backgroundColor = "red"
+    mayuscMinuscContainer.checked = false
+  }else{
+    mayuscMinuscContainer.style.backgroundColor = "green"
+    mayuscMinuscContainer.checked = true
   }
 
   return true
