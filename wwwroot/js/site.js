@@ -1,11 +1,20 @@
 ﻿
 
-function validarFormulario(password, ochoContainer, especialContainer, mayuscMinuscContainer) 
+function validarFormulario() 
 {
-  const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')','&','"','/','='
-]
+
   event.preventDefault()
   //Validacion de la contraseña
+ 
+
+  return true
+}
+
+
+function ValidacionContraseña(password, ochoContainer, especialContainer, mayuscMinuscContainer){
+  
+const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')','&','"','/','='
+]
   let carEspecialF = false, mayorOcho = false, mayusc = false, minusc = false;
 
   if(carEspeciales.some(x => {
@@ -46,6 +55,29 @@ function validarFormulario(password, ochoContainer, especialContainer, mayuscMin
     mayuscMinuscContainer.style.backgroundColor = "green"
     mayuscMinuscContainer.checked = true
   }
+}
 
-  return true
+
+function ValidarNacimiento(fechaNacimiento, textito){
+const año = new Date().getFullYear()
+const nacimiento = new Date(fechaNacimiento.value)
+nacimiento.setHours(24,00,00,00)
+añoNacimiento = nacimiento.getFullYear()
+if(año - añoNacimiento < 5 || año - añoNacimiento > 110)
+textito.hidden = false
+else{
+  textito.hidden = true
+}
+}
+
+
+
+
+function ValidarTelefono(telefono, textitoTel){
+
+  if(telefono.value.length != 8){
+    textitoTel.hidden = false
+  }else{
+    textitoTel.hidden = true
+  }
 }

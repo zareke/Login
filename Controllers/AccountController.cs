@@ -4,7 +4,7 @@ namespace login.Controllers;
 
 public class AccountController : Controller
 {
-    /*[HttpPost] */public IActionResult Login(/*List<Usuario> user*/)
+    /*[HttpPost]*/public IActionResult Login(/*List<Usuario> user*/)
     {
         
         ViewBag.Usuarios = BD.ObtenerUsuarios();
