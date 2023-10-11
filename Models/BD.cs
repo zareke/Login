@@ -19,6 +19,13 @@ public class BD
         return uss;
     }
 
+    public static void InsertarUsuario(Usuario user){
+        string sql = "exec InsertarUsuario @u,@p,@m,@f,@t";
+        using(SqlConnection db = new SqlConnection(_connectionString)){
+            db.Execute(sql, new {u = user.Username, p = user.Contraseña, m = user.Email, f = user.FechaNacimiento.ToString("yyyy-MM-ddTHH:mm:ss.fff"), t = user.NumeroTelefono});
+        }
+    }
+
 }
 
 

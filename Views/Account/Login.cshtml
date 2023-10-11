@@ -1,17 +1,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1>@ViewBag.Error</h1>
 <div id="dataUsuarios"></div>
 <script src="@Url.Content("https://localhost:7254/js/site.js?v=HiQ1At_J5cUTV1hndDMwCbtlbM1gy7Kn23IXKiONu1k")"></script>
 <h1>a!</h1>
-<form method="post" id="login" name="login"  onsubmit="return validarFormulario()">
+<form method="post" id="login" name="login" action='@Url.Action("Check","Account")' onsubmit="return validarFormulario()">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Usuario</label>
-    <input name="user" type="text" class="form-control" id="user" aria-describedby="emailHelp">
+    <input name="Username" type="text" class="form-control" id="user" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input name="password" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(password, ochoContainer, especialContainer, mayuscMinuscContainer)">
+    <input name="Contraseña" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(Contraseña, ochoContainer, especialContainer, mayuscMinuscContainer)">
     <p>La contraseña debe:</p>
           <ul class="list-group">
           <li class="list-group-item">
@@ -30,12 +31,12 @@
   </div>
     <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input name="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
   </div>
     <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento</label>
-    <input  onchange="ValidarNacimiento(fechaNacimiento, textito)" name="fechaNacimiento" type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <p id="textito" name="textito" hidden="true">El usuario debe tener mas de 5 años y menos de 110</p>
+    <input  onchange="ValidarNacimiento(FechaNacimiento, textito)" name="fechaNacimiento" type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <p id="textito" name="FechaNacimiento" hidden="true">El usuario debe tener mas de 5 años y menos de 110</p>
     
   </div>
     <div class="mb-3">
@@ -47,7 +48,7 @@
   <option value="opel">Opel</option>
   <option value="audi">Audi</option>
 </select>
-<input onkeyup="ValidarTelefono(telefono,textitoTel)" name="telefono" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<input onkeyup="ValidarTelefono(NumeroTelefono,textitoTel)" name="NumeroTelefono" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
   <p id="textitoTel" name="textitoTel" hidden="true">El numero de telefono no es valido</p>
 
   </div><!-- https://es.sprint.com/en/support/solutions/international/international-mobile-dial-codes.html -->

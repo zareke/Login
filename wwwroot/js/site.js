@@ -2,9 +2,9 @@
 
 function validarFormulario() 
 {
-
+  return true;
   event.preventDefault()
-  //Validacion de la contraseña
+  
  
 
   return true
