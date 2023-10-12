@@ -13,8 +13,7 @@ function validarFormulario()
 
 function ValidacionContraseña(password, ochoContainer, especialContainer, mayuscMinuscContainer){
   
-const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')','&','"','/','='
-]
+const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')','&','"','/','=']
   let carEspecialF = false, mayorOcho = false, mayusc = false, minusc = false;
 
   if(carEspeciales.some(x => {
