@@ -5,5 +5,8 @@ public class Usuario{
     public string Email{get;set;}
     public DateTime FechaNacimiento{get;set;}
     public int NumeroTelefono{get;set;}
+
+    public string Pregunta{get;set;}
+    public string Respuesta{get;set;}
     
 }
