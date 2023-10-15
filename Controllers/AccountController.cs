@@ -13,7 +13,7 @@ public class AccountController : Controller
     {
         return View();
     }
- public IActionResult Olvidado()
+    public IActionResult Olvidado()
     {
         return View();
     }
@@ -24,12 +24,11 @@ public class AccountController : Controller
     {
         user.Contraseña = EncryptionHelper.Encrypt(user.Contraseña);
         List<Usuario> uss = BD.ObtenerUsuarios();
-
         if (uss.Any(x => x.Username == user.Username) || uss.Any(x => x.Email == user.Email))
-        { TempData["user"] = uss.Any(x => x.Username == user.Username); TempData["email"] = uss.Any(x => x.Email == user.Email); return RedirectToAction("Register"); }
+        { if(uss.Any(x => x.Username == user.Username)) TempData["userRepetido"] = "Ese usuario ya existe"; else TempData["userRepetido"] =""; if(uss.Any(x => x.Email == user.Email)) TempData["emailRepetido"] = "Ese email ya existe"; else TempData["emailRepetido"] =""; return RedirectToAction("Register"); }
 
         BD.InsertarUsuario(user);
-        return RedirectToAction("Bienvenido", "new {user = user}");
+        return Redirect(Url.Action("Bienvenido", "Account", user));
 
     }
 
@@ -44,46 +43,52 @@ public class AccountController : Controller
             return RedirectToAction("Login");
         }
 
-Usuario usu;
+        Usuario usu;
 
-        if (uss.Any(x => x.Username == user) && EncryptionHelper.Decrypt(uss.Find(x=>x.Username == user).Contraseña) == pass)
+        if (uss.Any(x => x.Username == user) && EncryptionHelper.Decrypt(uss.Find(x => x.Username == user).Contraseña) == pass)
         {
-            usu = uss.Find(x=>x.Username == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
+            usu = uss.Find(x => x.Username == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
             TempData["login"] = "";
-             return RedirectToAction("Bienvenido", "new {user = usu}");
+            Console.WriteLine(uss[0].FechaNacimiento);
+            return Redirect(Url.Action("Bienvenido", "Account", usu));
         }
-        else if (uss.Any(x => x.Email == user) && EncryptionHelper.Decrypt(uss.Find(x=>x.Email == user).Contraseña) == pass)
+        else if (uss.Any(x => x.Email == user) && EncryptionHelper.Decrypt(uss.Find(x => x.Email == user).Contraseña) == pass)
         {
-            usu = uss.Find(x=>x.Email == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
+            usu = uss.Find(x => x.Email == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
             TempData["login"] = "";
-            return RedirectToAction("Bienvenido", "new {user = usu}");
+            return Redirect(Url.Action("Bienvenido", "Account", usu));
         }
         TempData["login"] = "Error: La contraseña o el usuario/email son incorrectos";
         return RedirectToAction("Login");
 
     }
- public IActionResult CheckOlvidado(string email, string preg, string resp)
+    public IActionResult CheckOlvidado(string email, string preg, string resp)
     {
         List<Usuario> uss = BD.ObtenerUsuarios();
 
 
         TempData["olvidado"] = "Error: La respuesta o el email son incorrectos";
         TempData["contraseña"] = "";
-         if (uss.Any(x => x.Email == email))
+        if (uss.Any(x => x.Email == email))
         {
-            Usuario user = uss.Find(x=>x.Email == email);
-            if(user.Pregunta == preg && user.Respuesta == resp){
+            Usuario user = uss.Find(x => x.Email == email);
+            if (user.Pregunta == preg && user.Respuesta == resp)
+            {
 
-            TempData["olvidado"] = "";
-            TempData["contraseña"] = "Contraseña: " + EncryptionHelper.Decrypt(user.Contraseña);
-            
+                TempData["olvidado"] = "";
+                TempData["contraseña"] = "Contraseña: " + EncryptionHelper.Decrypt(user.Contraseña);
+
             }
         }
         return RedirectToAction("Olvidado");
 
     }
-    public IActionResult Bienvenido(Usuario user){
+
+    [HttpGet]
+    public IActionResult Bienvenido(Usuario user)
+    {
         ViewBag.Usuario = user;
+        
         return View();
     }
 }

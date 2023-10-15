@@ -72,8 +72,12 @@ form div{
 }
 .flex{
   display: flex;
-  flex-wrap:wrap-reverse;
+  flex-wrap:wrap;
   align-items: center;
   justify-content: center;
 
+}
+
+.flex h1{
+  font-size: 70px;
 }

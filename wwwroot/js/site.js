@@ -1,18 +1,14 @@
 ﻿
-function UserOMailRepetido(userBool, mailBool, userCheck, mailCheck) {
-  console.log(window.getComputedStyle(textito).display == "none")
-  if (userBool) userCheck.hidden = false; else userCheck.hidden = true
-  if (mailBool) mailCheck.hidden = false; else mailCheck.hidden = true
-}
 
-function validarFormulario(user, mail, pass, fecha, tel, respuesta, textoError, terminos, terminosTexto, ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel) {
+
+function validarFormulario(user, mail, pass, fecha, tel, respuesta, textoError, terminos, terminosTexto, ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel, igualdadContainer) {
   if (!terminos.checked)
     terminosTexto.hidden = false; else terminosTexto.hidden = true;
 
   if (user.value.length == 0 || mail.value.length == 0 || pass.value.length == 0 || fecha.value.length == 0 || tel.value.length == 0 || respuesta.value.length == 0) {
     textoError.hidden = false
     return false
-  } else if (!terminos.checked || (!ochoContainer.checked || !especialContainer.checked || !mayuscMinuscContainer.checked) || window.getComputedStyle(textito).display != "none" || window.getComputedStyle(textitoTel).display !="none") {
+  } else if (!terminos.checked || (!ochoContainer.checked || !especialContainer.checked || !mayuscMinuscContainer.checked || !igualdadContainer.checked) || window.getComputedStyle(textito).display != "none" || window.getComputedStyle(textitoTel).display !="none") {
     textoError.hidden = true
     return false
   }
@@ -22,27 +18,35 @@ function validarFormulario(user, mail, pass, fecha, tel, respuesta, textoError, 
   }
 
 }
+function MostrarContraseña(mostrar,con2, contraseña){
+if(mostrar.checked){
+  contraseña.type = "text"
+  con2.type = "text"
+}else{
+  contraseña.type = "password"
+  con2.type = "password"
+}
+}
 
-function ValidacionContraseña(password, ochoContainer, especialContainer, mayuscMinuscContainer) {
+function ValidacionContraseña(password, ochoContainer, especialContainer, mayuscMinuscContainer,con2,igualdadContainer) {
 
   const carEspeciales = ['*', '#', '!', '`', '!', '@', '#', '$', '%', '^', '&', '*', '_', '+', '(', ')', '&', '"', '/', '=']
-  let carEspecialF = false, mayorOcho = false, mayusc = false, minusc = false;
+  let carEspecialF = false, mayorOcho = false, mayusc = false, minusc = false, igual=false
 
   if (carEspeciales.some(x => {
     return password.value.includes(x);
   })) carEspecialF = true
-
-  for (let i = 0; i < password.value.length; i++) {
-
-    if (!carEspeciales.includes(password.value[i]) && password.value[i] == password.value[i].toUpperCase() && !mayusc) {
-      mayusc = true;
-    }
-    if (!carEspeciales.includes(password.value[i]) && password.value[i] == password.value[i].toLowerCase() && !minusc) {
-      minusc = true;
-    }
-  }
+  const isAnyUpper = string => /\p{Lu}/u.test(string)
+  function hasLowerCase(str) {
+    return (/[a-z]/.test(str));
+}
+if(isAnyUpper(password.value))mayusc=true
+  if(hasLowerCase(password.value))minusc=true
   if (password.value.length >= 8) {
     mayorOcho = true;
+  }
+  if(con2.value == password.value){
+    igual = true
   }
   //Cambio de estilo
   if (!mayorOcho) {
@@ -65,6 +69,13 @@ function ValidacionContraseña(password, ochoContainer, especialContainer, mayus
   } else {
     mayuscMinuscContainer.style.backgroundColor = "green"
     mayuscMinuscContainer.checked = true
+  }
+  if(!igual){
+    igualdadContainer.style.backgroundColor = "red"
+    igualdadContainer.checked = false
+  }else{
+    igualdadContainer.style.backgroundColor = "green"
+    igualdadContainer.checked = true
   }
 }
 

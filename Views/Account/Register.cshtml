@@ -2,24 +2,30 @@
     ViewData["Title"] = "Registro";
 }
 
-<div id="dataUsuarios"></div>
-<body onload="UserOMailRepetido('@TempData["user"]', '@TempData["email"]', userCheck,mailCheck)"></body>
 
 
-<form class="registro" method="post" id="register" name="register" action='@Url.Action("Check","Account")' onsubmit="return validarFormulario(Username,Email,Contraseña,FechaNacimiento,NumeroTelefono, Respuesta, textoError, terminos,terminosTexto,ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel)">
+
+
+<form class="registro" method="post" id="register" name="register" action='@Url.Action("Check","Account")' onsubmit="return validarFormulario(Username,Email,Contraseña,FechaNacimiento,NumeroTelefono, Respuesta, textoError, terminos,terminosTexto,ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel,igualdadContainer)">
   <h1 style="color:red" name="textoError" hidden="true" id="textoError">Error: Ningun campo puede estar vacio.</h1>
   <h1>Crear cuenta</h1>
   
   <div>
     <label for="user" class="form-label">Usuario</label>
     <input name="Username" type="text" class="form-control" id="user" aria-describedby="emailHelp">
-    <p style="color:red" id="userCheck" name="userCheck" hidden="true">Ese nombre de usuario ya existe</p>
+    <p style="color:red" id="userCheck" name="userCheck">@TempData["userRepetido"]</p>
   </div>
   
   <div>
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input name="Contraseña" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(Contraseña, ochoContainer, especialContainer, mayuscMinuscContainer)">
-    <br><p>La contraseña debe:</p>
+    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+    <input name="Contraseña" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(Contraseña, ochoContainer, especialContainer, mayuscMinuscContainer,con2,igualdadContainer)">
+      <p>Repetir contraseña</p>
+    <input name="con2" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(Contraseña, ochoContainer, especialContainer, mayuscMinuscContainer,con2,igualdadContainer)">
+ 
+    <input onclick="MostrarContraseña(mostrar,con2,Contraseña)" name="mostrar" id="mos" type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label  class="form-check-label" for="exampleCheck1">Mostrar contraseña</label>
+<div>
+    <br><p>La contraseña debe tener:</p>
           <ul class="list-group">
             
             <li class="list-group-item">
@@ -37,13 +43,18 @@
               <label class="form-check-label stretched-link" for="thirdCheckboxStretched">Al menos 1 mayuscula y 1 minuscula</label>
             </li>
 
+            <li class="list-group-item">
+              <input style="background-color: red;" class="form-check-input me-1" name="igualdadContainer" type="checkbox" value=""  onclick="return false;">
+              <label class="form-check-label stretched-link" for="thirdCheckboxStretched">Igualdad con la segunda</label>
+            </li>
+
           </ul>
   </div>
   
   <div>
     <label for="e" class="form-label">Email</label>
     <input name="Email" type="email" class="form-control" id="e" aria-describedby="emailHelp">
-    <p style="color:red" id="mailCheck" name="mailCheck" hidden="true">Ese email ya existe</p>
+    <p style="color:red" id="mailCheck" name="mailCheck" >@TempData["emailRepetido"]</p>
   </div>
 
   <div>
@@ -80,3 +91,4 @@
   <a href='@Url.Action("Login","Account")'>Ya tengo una cuenta</a>
 
 </form>
+<div id="dataUsuarios"></div>
