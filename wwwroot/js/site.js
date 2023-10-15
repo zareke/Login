@@ -86,7 +86,7 @@ function ValidarNacimiento(fechaNacimiento, textito) {
 
 function ValidarTelefono(telefono, textitoTel) {
 
-  if (telefono.value.length != 8) {
+  if (telefono.value.length >10) {
     textitoTel.hidden = false
   } else {
     textitoTel.hidden = true

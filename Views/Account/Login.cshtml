@@ -1,18 +1,23 @@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Login";
 }
-<h1>@TempData["login"]</h1>
-<form action='@Url.Action("CheckLogin","Account", new {user = "user", pass = "pass"})'>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email o username</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name="user" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-    <input type="password" name="pass" class="form-control" id="exampleInputPassword1">
-  </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-  <a href='@Url.Action("Register","Account")'>No tengo una cuenta</a>
-  <a href='@Url.Action("Olvidado","Account")'>Me olvide mi contraseña</a>
-</form>
+
+  <form class="login" action='@Url.Action("CheckLogin","Account", new {user = "user", pass = "pass"})'>
+    <h1>Iniciar sesion</h1>
+    <div>
+      <label for="exampleInputEmail1" class="form-label">Email o username</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="user" aria-describedby="emailHelp">
+    </div>
+
+    <div>
+      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+      <input type="password" name="pass" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href='@Url.Action("Register","Account")'>No tengo una cuenta</a>
+      <a href='@Url.Action("Olvidado","Account")'>Me olvide mi contraseña</a>
+    </div>
+
+  </form>

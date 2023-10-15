@@ -1,83 +1,81 @@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Registro";
 }
 <h1 name="textoError" hidden="true" id="textoError">Error: Ningun campo puede estar vacio.</h1>
 <div id="dataUsuarios"></div>
 <body onload="UserOMailRepetido('@TempData["user"]', '@TempData["email"]', userCheck,mailCheck)"></body>
-<h1>a!</h1>
 
-<form  method="post" id="register" name="register" action='@Url.Action("Check","Account")' onsubmit="return validarFormulario(Username,Email,Contraseña,FechaNacimiento,NumeroTelefono, Respuesta, textoError, terminos,terminosTexto,ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel)">
-  <div class="mb-3">
+
+<form class="registro" method="post" id="register" name="register" action='@Url.Action("Check","Account")' onsubmit="return validarFormulario(Username,Email,Contraseña,FechaNacimiento,NumeroTelefono, Respuesta, textoError, terminos,terminosTexto,ochoContainer, especialContainer, mayuscMinuscContainer, textito, textitoTel)">
+  <h1>Crear cuenta</h1>
+  
+  <div>
     <label for="user" class="form-label">Usuario</label>
     <input name="Username" type="text" class="form-control" id="user" aria-describedby="emailHelp">
     <p id="userCheck" name="userCheck" hidden="true">Ese nombre de usuario ya existe</p>
   </div>
   
-  <div class="mb-3">
+  <div>
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input name="Contraseña" type="password" class="form-control" id="exampleInputPassword1" onkeyup="ValidacionContraseña(Contraseña, ochoContainer, especialContainer, mayuscMinuscContainer)">
-    <p>La contraseña debe:</p>
+    <br><p>La contraseña debe:</p>
           <ul class="list-group">
+            
             <li class="list-group-item">
               <input class="form-check-input me-1" name="ochoContainer" type="checkbox" value="" id="firstCheckboxStretched" onclick="return false;">
               <label class="form-check-label stretched-link" for="firstCheckboxStretched">Mas de 8 caracteres</label>
             </li>
+
             <li class="list-group-item">
               <input class="form-check-input me-1" name="especialContainer" type="checkbox" value="" id="secondCheckboxStretched" onclick="return false;">
               <label class="form-check-label stretched-link" for="secondCheckboxStretched">Al menos un caracter especial</label>
             </li>
+
             <li class="list-group-item">
               <input class="form-check-input me-1" name="mayuscMinuscContainer" type="checkbox" value="" id="thirdCheckboxStretched" onclick="return false;">
               <label class="form-check-label stretched-link" for="thirdCheckboxStretched">Al menos 1 mayuscula y 1 minuscula</label>
             </li>
+
           </ul>
   </div>
   
-  <div class="mb-3">
+  <div>
     <label for="e" class="form-label">Email</label>
     <input name="Email" type="email" class="form-control" id="e" aria-describedby="emailHelp">
     <p id="mailCheck" name="mailCheck" hidden="true">Ese email ya existe</p>
   </div>
 
-  <div class="mb-3">
+  <div>
     <label for="f" class="form-label">Fecha de nacimiento</label>
     <input  onchange="ValidarNacimiento(FechaNacimiento, textito)" name="FechaNacimiento" type="date" class="form-control" id="f" aria-describedby="emailHelp">
     <p id="textito" name="fechaNacimiento" hidden="true">El usuario debe tener mas de 5 años y menos de 110</p>
   </div>
   
-  <div class="mb-3">
+  <div>
     <!--PONER EL SELECT AL LADO DEL INPUT TEL-->
-    <label for="t" class="form-label">Telefono</label><br/>
-    <select>
-      <option value="+54">+54</option>
-      <option value="+1">+1</option>
-      <option value="+23">+23</option>
-      <option value="+43">+43</option>
-    </select>
-
+    <label for="t">Telefono</label>
     <input onkeyup="ValidarTelefono(NumeroTelefono,textitoTel)" name="NumeroTelefono" type="number" class="form-control" id="t" aria-describedby="emailHelp">
     <p id="textitoTel" name="textitoTel" hidden="true">El numero de telefono no es valido</p>
 
   </div><!-- https://es.sprint.com/en/support/solutions/international/international-mobile-dial-codes.html -->
   
-  <div class="mb-3 form-check">
+  <div>
     <input name="terminos" id="terminos" type="checkbox" class="form-check-input" id="exampleCheck1">
     <label  class="form-check-label" for="exampleCheck1">Acepto los <a href="https://www.argentina.gob.ar/terminos-y-condiciones" target="_blank">terminos y condiciones</a></label>
     <p hidden="true" id="terminosTexto" name="terminosTexto">Tiene que aceptar los terminos y condiciones.</p>
   </div>
-  <div class="mb-3">
+
+  <div>
     <label for="b" class="form-label">Preguntas de seguridad</label>
     <select  name="Pregunta" class="form-select" aria-label="Default select example">
-  <option value="0">¿Cual es su pelicula favorita?</option>
-  <option value="1">¿Cuantas mascotas tiene?</option>
-  <option value="2">¿Que deportes practica?</option>
-</select>
+      <option value="0">¿Cual es su pelicula favorita?</option>
+      <option value="1">¿Cuantas mascotas tiene?</option>
+      <option value="2">¿Que deportes practica?</option>
+    </select>
     <input name="Respuesta" type="text" class="form-control" id="b" aria-describedby="emailHelp">
   </div>
+
   <button type="submit" id="submit"  class="btn btn-primary">Submit</button>
   <a href='@Url.Action("Login","Account")'>Ya tengo una cuenta</a>
-
-  
-
 
 </form>

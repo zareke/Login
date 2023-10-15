@@ -1,21 +1,60 @@
-html {
-  font-size: 14px;
-  position: relative;
-  min-height: 100%;
+body{
+  width: 100%;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://images6.alphacoders.com/595/thumb-1920-595928.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+label,p{
+  color: white;
+}
+.login{
+  width: 40%; 
+  border-radius: 5%;
+}
+.registro{
+  width: 50%; 
+  border-radius: 5%;
+}
+.olvidado{
+  width: 40%; 
+  border-radius: 5%;
+}
+form{
+  padding: 5%;
+  background-color: #040e17;
+  border-radius: 5%;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+form h1{
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+}
+form div{
+  width: 100%;
+  margin-bottom: 4%;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.btn-primary{
+  width: 20%;
+  margin: 1%;
+  margin-bottom:2% ;
 }
-
-body {
-  margin: 20px 60px 0px 20px;
+.stretched-link{
+  color:black;
 }
-
-footer {
-  position: fixed; 
-  bottom: 0; 
-  margin: 10px 0px 20px 0px;
+.numero-pais select option{
+  width: 5px;
+  margin: 1%;
+}
+.bienvenido{
+  font-size: 150px;
 }

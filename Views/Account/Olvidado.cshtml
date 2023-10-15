@@ -1,22 +1,24 @@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Olvide mi contraseña";
 }
 <h1>@TempData["olvidado"]</h1>
-<form action='@Url.Action("CheckOlvidado","Account", new {email = "user",preg = "preg", resp = "resp"})'>
+<form class="olvidado" action='@Url.Action("CheckOlvidado","Account", new {email = "user",preg = "preg", resp = "resp"})'>
+    <h1>Olvidaste tu contraseña</h1>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="form-label">Email</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
     </div>
-     <div class="mb-3">
-    <label for="b" class="form-label">Preguntas de seguridad</label>
-    <select  name="preg" class="form-select" aria-label="Default select example">
-  <option value="0">¿Cual es su pelicula favorita?</option>
-  <option value="1">¿Cuantas mascotas tiene?</option>
-  <option value="2">¿Que deportes practica?</option>
-</select>
-    <input name="resp" type="text" class="form-control" id="b" aria-describedby="emailHelp">
-  </div>
+
+    <div class="mb-3">
+      <label for="b" class="form-label">Preguntas de seguridad</label>
+      <select  name="preg" class="form-select" aria-label="Default select example">
+        <option value="0">¿Cual es su pelicula favorita?</option>
+        <option value="1">¿Cuantas mascotas tiene?</option>
+        <option value="2">¿Que deportes practica?</option>
+      </select>
+      <input name="resp" type="text" class="form-control" id="b" aria-describedby="emailHelp">
     </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href='@Url.Action("Register","Account")'>No tengo una cuenta</a>
 
