@@ -1,5 +1,18 @@
 @{
     ViewData["Title"] = "Bienvenido";
 }
-<h1 class="bienvenido">BIENVENIDO</h1>
-<a href='@Url.Action("Login","Account")'>a</a>
+<div class="flex">
+<p class="bienvenido">BIENVENIDO AL SITIO MAS INCREIBLE DEL MUNDO</p>
+<p class="bienvenido">Sus datos:</p>
+@{
+Usuario u = ViewBag.Usuario;
+<h1>@u.Username</h1>
+<h1>@u.Contraseña;</h1>
+<h1>@u.Email;</h1>
+<h1>@u.FechaNacimiento;</h1>
+<h1>@u.NumeroTelefono;</h1>
+}
+
+
+<a href='@Url.Action("Login","Account")' id="botonTerrorifico" style="color: red;">Cerrar sesion</a>
+</div>

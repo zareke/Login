@@ -4,7 +4,8 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(https://images6.alphacoders.com/595/thumb-1920-595928.jpg);
+  background-attachment: fixed;
+  background-image: linear-gradient(white, #929aad);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -57,4 +58,22 @@ form div{
 }
 .bienvenido{
   font-size: 150px;
+}
+
+.checkPass{
+  pointer-events: none;
+}
+
+.botonTerrorifico{
+  text-decoration: underline;
+}
+.bienvenido{
+  font-size:xx-large;
+}
+.flex{
+  display: flex;
+  flex-wrap:wrap-reverse;
+  align-items: center;
+  justify-content: center;
+
 }

@@ -1,8 +1,9 @@
 @{
     ViewData["Title"] = "Olvide mi contraseña";
 }
-<h1>@TempData["olvidado"]</h1>
+
 <form class="olvidado" action='@Url.Action("CheckOlvidado","Account", new {email = "user",preg = "preg", resp = "resp"})'>
+  <h1 style="color:red;font-size:large;">@TempData["olvidado"]</h1>
     <h1>Olvidaste tu contraseña</h1>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -18,9 +19,9 @@
       </select>
       <input name="resp" type="text" class="form-control" id="b" aria-describedby="emailHelp">
     </div>
-
+<h1 style="color:green;font-size:large;">@TempData["contraseña"]</h1>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <a href='@Url.Action("Login","Account")'>Ya tengo una cuenta</a>
     <a href='@Url.Action("Register","Account")'>No tengo una cuenta</a>
 
 </form>
-<h1>@TempData["contraseña"]</h1>

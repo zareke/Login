@@ -3,6 +3,7 @@
 }
 
   <form class="login" action='@Url.Action("CheckLogin","Account", new {user = "user", pass = "pass"})'>
+    <h1 style="color:red;font-size:large;">@TempData["login"]</h1>
     <h1>Iniciar sesion</h1>
     <div>
       <label for="exampleInputEmail1" class="form-label">Email o username</label>

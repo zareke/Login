@@ -29,7 +29,7 @@ public class AccountController : Controller
         { TempData["user"] = uss.Any(x => x.Username == user.Username); TempData["email"] = uss.Any(x => x.Email == user.Email); return RedirectToAction("Register"); }
 
         BD.InsertarUsuario(user);
-        return View("Bienvenido");
+        return RedirectToAction("Bienvenido", "new {user = user}");
 
     }
 
@@ -44,17 +44,19 @@ public class AccountController : Controller
             return RedirectToAction("Login");
         }
 
-
+Usuario usu;
 
         if (uss.Any(x => x.Username == user) && EncryptionHelper.Decrypt(uss.Find(x=>x.Username == user).Contraseña) == pass)
         {
+            usu = uss.Find(x=>x.Username == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
             TempData["login"] = "";
-            return View("Bienvenido");
+             return RedirectToAction("Bienvenido", "new {user = usu}");
         }
         else if (uss.Any(x => x.Email == user) && EncryptionHelper.Decrypt(uss.Find(x=>x.Email == user).Contraseña) == pass)
         {
+            usu = uss.Find(x=>x.Email == user && EncryptionHelper.Decrypt(x.Contraseña) == pass);
             TempData["login"] = "";
-            return View("Bienvenido");
+            return RedirectToAction("Bienvenido", "new {user = usu}");
         }
         TempData["login"] = "Error: La contraseña o el usuario/email son incorrectos";
         return RedirectToAction("Login");
@@ -80,6 +82,9 @@ public class AccountController : Controller
         return RedirectToAction("Olvidado");
 
     }
+    public IActionResult Bienvenido(Usuario user){
+        ViewBag.Usuario = user;
+        return View();
+    }
 }
-
 
