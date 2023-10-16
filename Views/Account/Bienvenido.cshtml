@@ -3,17 +3,11 @@
 }
 <div class="flex">
 <h1 class="bienvenido">BIENVENIDO AL SITIO MAS INCREIBLE DEL MUNDO</h1>
-<h2 class="bienvenido">Sus datos:</h2>
 
 @{
 Usuario u = ViewBag.Usuario;
-<h3>Usuario: @u.Username</h3>
-<h3>Contraseña: @EncryptionHelper.Decrypt(u.Contraseña)</h3>
-<h3>Email: @u.Email</h3>
-<h3>Fecha de nacimiento: @u.FechaNacimiento</h3>
-<h3>Numero de telefono: @u.NumeroTelefono</h3>
+<h3>Usuario: @u.Username - Email: @u.Email - <a href='@Url.Action("Login","Account")' id="botonTerrorifico" style="color: red;"> Cerrar sesion</a>
+</h3>
 }
 
 
-<a href='@Url.Action("Login","Account")' id="botonTerrorifico" style="color: red;">Cerrar sesion</a>
-</div>
